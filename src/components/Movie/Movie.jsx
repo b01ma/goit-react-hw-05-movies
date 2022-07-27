@@ -4,7 +4,7 @@ const Movie = () => {
   return (
     <div>
       <div>
-        <img src="#" alt="Poster image" />
+        <img src="#" alt="Poster" />
       </div>
       <div>
         <h2>Title of the movie</h2>
