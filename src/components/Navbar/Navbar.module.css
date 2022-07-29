@@ -1,0 +1,19 @@
+.container {
+    padding: 10px;
+    background-color: rgb(28, 178, 237);
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: auto;
+    padding-left: 15px;
+
+}
+
+.navbarItem {
+    margin-right: 10px;
+}

@@ -1,5 +1,5 @@
 // import { searchMovies } from 'service/moviesAPI';
-// import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Cast from './Cast/Cast';
 import Movie from './Movie/Movie';
@@ -9,16 +9,12 @@ import Searchbar from './Searchbar/Searchbar';
 import TrendingMovies from './TrendingMovies/TrendingMovies';
 
 export const App = () => {
-  const moviesTest = [
-    {
-      id: 1,
-      name: 'test1',
-    },
-    {
-      id: 2,
-      name: 'test2',
-    },
-  ];
+  const [query, setQuery] = useState('');
+
+  function getQuery(queryWord) {
+    setQuery(queryWord);
+  }
+
   // useEffect(() => {
   //   searchMovies('black', 1)
   //     .then(data => {
@@ -32,11 +28,14 @@ export const App = () => {
   return (
     <div>
       <Navbar />
-      <Searchbar />
-      <TrendingMovies movies={moviesTest} />
+      <Searchbar onSubmit={getQuery} />
+
+      {query && <Movie />}
+
+      {/* <TrendingMovies />
       <Movie />
       <Cast />
-      <Review />
+      <Review /> */}
     </div>
   );
 };
