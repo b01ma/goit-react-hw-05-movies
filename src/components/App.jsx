@@ -1,12 +1,12 @@
 // import { searchMovies } from 'service/moviesAPI';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import Cast from './Cast/Cast';
+// import Cast from './Cast/Cast';
 import Movie from './Movie/Movie';
 import Navbar from './Navbar/Navbar';
-import Review from './Review/Review';
+// import Review from './Review/Review';
 import Searchbar from './Searchbar/Searchbar';
-import TrendingMovies from './TrendingMovies/TrendingMovies';
+// import TrendingMovies from './TrendingMovies/TrendingMovies';
 
 export const App = () => {
   const [query, setQuery] = useState('');
