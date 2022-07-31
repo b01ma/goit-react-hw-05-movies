@@ -1,24 +1,26 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { BASE_IMG_URL } from 'service/moviesAPI';
 
 const Movie = ({ movies, genres }) => {
   // console.log(movies);
 
-  const movieGenres = (genreIdArray, allGenres) => {
-    console.log('genreIdArray:', genreIdArray);
-    console.log('allGenres:', allGenres);
+  // const movieGenres = (genreIdArray, allGenres) => {
+  //   console.log('genreIdArray:', genreIdArray);
+  //   console.log('allGenres:', allGenres);
 
-    allGenres.reduce((matchedGenres, genre) => {
-      if (genreIdArray.includes(genre.id)) {
-        console.log('genreId matched', genre.id);
-        console.log('genreId name:', genre.name);
+  //   allGenres.reduce((matchedGenres, genre) => {
+  //     if (genreIdArray.includes(genre.id)) {
+  //       console.log('genreId matched', genre.id);
+  //       console.log('genreId name:', genre.name);
 
-        // return matchedGenres.push(genre.name);
-      }
+  //       // return matchedGenres.push(genre.name);
+  //     }
 
-      return matchedGenres;
-    }, []);
-  };
+  //     return matchedGenres;
+  //   }, []);
+  // };
+
+  console.log(genres);
 
   return (
     <ul>
