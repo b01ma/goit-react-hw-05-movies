@@ -1,7 +1,7 @@
 // import React, { useEffect } from 'react';
 import { BASE_IMG_URL } from 'service/moviesAPI';
 
-const Movie = ({ movies, genres }) => {
+const MovieDetails = ({ movies, genres }) => {
   // console.log(movies);
 
   // const movieGenres = (genreIdArray, allGenres) => {
@@ -55,4 +55,4 @@ const Movie = ({ movies, genres }) => {
   );
 };
 
-export default Movie;
+export default MovieDetails;

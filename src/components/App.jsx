@@ -1,17 +1,18 @@
+import { Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import {
   searchMovieByQuery,
   getGenreList,
   getTrendingMovies,
 } from 'service/moviesAPI';
-import { useState, useEffect } from 'react';
 
-// import Cast from './Cast/Cast';
-import Movie from './Movie/Movie';
-import Navbar from './Navbar/Navbar';
-// import Review from './Review/Review';
-import Searchbar from './Searchbar/Searchbar';
-import LoadMoreBtn from './Buttons/LoadMoreBtn';
-import TrendingMovies from './TrendingMovies/TrendingMovies';
+import Home from 'pages/Home';
+import Movies from 'pages/Movies';
+import Navbar from './Navbar';
+import PageNotFound from 'pages/PageNotFound';
+import Cast from './Cast';
+import Reviews from './Reviews';
+import MovieDetails from './MovieDetails';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -20,13 +21,6 @@ export const App = () => {
   const [movies, setMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [genres, setGenres] = useState([]);
-
-  useEffect(() => {
-    getGenreList().then(r => setGenres(r.data.genres));
-    getTrendingMovies().then(response => {
-      setTrendingMovies(response.data.results);
-    });
-  }, []);
 
   useEffect(() => {
     if (query) {
@@ -51,34 +45,34 @@ export const App = () => {
     }
   }, [query, currentPage]);
 
-  function getQuery(queryWord) {
-    setQuery(queryWord);
-  }
+  // function getQuery(queryWord) {
+  //   setQuery(queryWord);
+  //   setMovies([]);
+  // }
 
-  function showLoadMoreBtn() {
-    if (currentPage < totalPages) {
-      return true;
-    }
-  }
+  // function showLoadMoreBtn() {
+  //   if (currentPage < totalPages) {
+  //     return true;
+  //   }
+  // }
 
-  function handleLoadMore() {
-    setCurrentPage(currentPage + 1);
-  }
+  // function handleLoadMore() {
+  //   setCurrentPage(currentPage + 1);
+  // }
 
   return (
     <div>
       <Navbar />
-      <Searchbar onSubmit={getQuery} />
-
-      <TrendingMovies movies={trendingMovies} />
-
-      {query && <Movie movies={movies} genres={genres} />}
-      {showLoadMoreBtn() && <LoadMoreBtn onClick={handleLoadMore} />}
-
-      {/* 
-      <Movie />
-      <Cast />
-      <Review /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="movies" element={<Movies />}>
+          <Route path=":movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="review" element={<Reviews />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </div>
   );
 };

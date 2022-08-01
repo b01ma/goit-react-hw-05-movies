@@ -6,7 +6,7 @@ export const BASE_IMG_URL = 'https://image.tmdb.org/t/p/';
 
 export const searchMovieByQuery = (query, page = 1) =>
   axios.get(
-    `${BASE_URL}search/movie?api_key=${KEY}&query=${query}&page=${page}&include_adult=true`
+    `${BASE_URL}search/movie?api_key=${KEY}&query=${query}&page=${page}&include_adult=false`
   );
 
 export const getGenreList = () =>
