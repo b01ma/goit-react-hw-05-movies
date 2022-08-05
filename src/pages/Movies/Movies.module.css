@@ -1,0 +1,17 @@
+.container {
+width: 1024px;
+ margin-right: auto;
+ margin-left: auto;
+}
+
+.movieList {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movieList li {
+    margin: 5px;
+    width: 200px;
+}
+

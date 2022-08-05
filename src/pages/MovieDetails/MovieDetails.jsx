@@ -1,10 +1,25 @@
 // import React, { useEffect } from 'react';
-import { BASE_IMG_URL } from 'service/moviesAPI';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams, Outlet } from 'react-router-dom';
+import { BASE_IMG_URL, getMovieDetails } from 'service/moviesAPI';
 
 const MovieDetails = ({ movies, genres }) => {
+  const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    getMovieDetails(movieId).then(result => setMovie(result.data));
+  }, [movieId]);
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate('/');
+  };
+
   // console.log(movies);
 
-  // const movieGenres = (genreIdArray, allGenres) => {
+  // const movieGenres = (genreIdArray), allGenres) => {
   //   console.log('genreIdArray:', genreIdArray);
   //   console.log('allGenres:', allGenres);
 
@@ -20,16 +35,19 @@ const MovieDetails = ({ movies, genres }) => {
   //   }, []);
   // };
 
-  console.log(genres);
-
   return (
-    <ul>
-      {movies?.map(movie => {
-        return (
+    <div>
+      <button type="button" onClick={handleGoBack}>
+        Go back
+      </button>
+
+      <h2>Movie Details</h2>
+      {movie && (
+        <div>
           <li key={movie.id}>
             <div>
               <img
-                src={`${BASE_IMG_URL}w200/${movie.poster_path}`}
+                src={`${BASE_IMG_URL}w200${movie.poster_path}`}
                 alt="Poster"
               />
             </div>
@@ -44,14 +62,19 @@ const MovieDetails = ({ movies, genres }) => {
             <div>
               <h5>Additional Information</h5>
               <ul>
-                <li>Cast</li>
-                <li>Review</li>
+                <li>
+                  <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+                </li>
+                <li>
+                  <Link to={`/movies/${movieId}/review`}>Review</Link>
+                </li>
               </ul>
+              <Outlet />
             </div>
           </li>
-        );
-      })}
-    </ul>
+        </div>
+      )}
+    </div>
   );
 };
 

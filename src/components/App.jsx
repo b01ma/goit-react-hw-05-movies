@@ -1,5 +1,5 @@
-import { Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
 import {
   searchMovieByQuery,
   getGenreList,
@@ -12,10 +12,21 @@ import Navbar from './Navbar';
 import PageNotFound from 'pages/PageNotFound';
 import Cast from './Cast';
 import Reviews from './Reviews';
-import MovieDetails from './MovieDetails';
+import MovieDetails from '../pages/MovieDetails';
+import Searchbar from './Searchbar/Searchbar';
 
 export const App = () => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const params = useMemo(
+    () => Object.fromEntries([...searchParams]),
+    [searchParams]
+  );
+  const { keyWord, page } = params;
+
+  // console.log(query, page);
+
+  const [query, setQuery] = useState(keyWord);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [movies, setMovies] = useState([]);
@@ -26,6 +37,11 @@ export const App = () => {
     if (query) {
       loadMovies();
     }
+
+    setSearchParams({
+      keyWord: query,
+      page: currentPage,
+    });
 
     function loadMovies() {
       // setIsLoading(true);
@@ -45,10 +61,10 @@ export const App = () => {
     }
   }, [query, currentPage]);
 
-  // function getQuery(queryWord) {
-  //   setQuery(queryWord);
-  //   setMovies([]);
-  // }
+  function getQuery(queryWord) {
+    setQuery(queryWord);
+    setMovies([]);
+  }
 
   // function showLoadMoreBtn() {
   //   if (currentPage < totalPages) {
@@ -65,7 +81,8 @@ export const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="movies" element={<Movies />}>
+        <Route path="movies" element={<Movies movies={movies} />}>
+          <Route index element={<Searchbar onSearch={getQuery} />} />
           <Route path=":movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="review" element={<Reviews />} />

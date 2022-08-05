@@ -14,3 +14,6 @@ export const getGenreList = () =>
 
 export const getTrendingMovies = () =>
   axios.get(`${BASE_URL}trending/all/week?api_key=${KEY}`);
+
+export const getMovieDetails = movieId =>
+  axios.get(`${BASE_URL}movie/${movieId}?api_key=${KEY}`);

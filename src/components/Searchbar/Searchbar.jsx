@@ -1,9 +1,8 @@
-// import css from './Searchbar.module.css';
+import css from './Searchbar.module.css';
 import React, { useState, useRef, useEffect } from 'react';
-// import { ReactComponent as SearchIcon } from '../../icons/search-icon.svg';
 // import PropTypes from 'prop-types';
 
-const Searchbar = ({ onSubmit }) => {
+const Searchbar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
   const prevQuery = usePrevious(query);
@@ -31,11 +30,11 @@ const Searchbar = ({ onSubmit }) => {
       return;
     }
 
-    onSubmit(query);
+    onSearch(query);
   }
 
   return (
-    <header>
+    <div>
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
@@ -47,7 +46,7 @@ const Searchbar = ({ onSubmit }) => {
         />
         <button type="submit">Search</button>
       </form>
-    </header>
+    </div>
   );
 };
 
