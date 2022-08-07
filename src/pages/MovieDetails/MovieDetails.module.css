@@ -1,0 +1,30 @@
+.button {
+    display: inline-block;
+    height: 30px;
+    padding: 0 10px 0 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.basicInfo {
+    margin-left: 20px;
+}
+
+.basicInfo p {
+    margin-bottom: 10px;
+}
+
+
+.additionalInfo h5 {
+    margin-bottom: 10px;
+}

@@ -9,17 +9,22 @@ const Movies = ({ movies }) => {
       <p>Movies</p>
       <Outlet />
       <ul className={css.movieList}>
-        {movies.map(movie => {
+        {movies?.map(movie => {
           return (
             <li key={movie.id}>
               <div>
-                <img
-                  src={`${BASE_IMG_URL}w200${movie.poster_path}`}
-                  alt="Poster"
-                />
+                <Link to={`/movies/${movie.id}`}>
+                  <img
+                    className={css.image}
+                    src={`${BASE_IMG_URL}w200${movie.poster_path}`}
+                    alt="Poster"
+                  />
+                </Link>
               </div>
               <div>
-                <Link to={`/movies/${movie.id}`}>{movie.original_title}</Link>
+                <Link className={css.movieTitle} to={`/movies/${movie.id}`}>
+                  {movie.original_title}
+                </Link>
               </div>
             </li>
           );

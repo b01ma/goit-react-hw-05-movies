@@ -16,55 +16,35 @@ import MovieDetails from '../pages/MovieDetails';
 import Searchbar from './Searchbar/Searchbar';
 
 export const App = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [movies, setMovies] = useState([]);
+  // const [genres, setGenres] = useState([]);
+
+  const [searchParams] = useSearchParams();
 
   const params = useMemo(
     () => Object.fromEntries([...searchParams]),
     [searchParams]
   );
-  const { keyWord, page } = params;
-
-  // console.log(query, page);
-
-  const [query, setQuery] = useState(keyWord);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [movies, setMovies] = useState([]);
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [genres, setGenres] = useState([]);
+  const { searchQuery, page } = params;
 
   useEffect(() => {
-    if (query) {
-      loadMovies();
-    }
-
-    setSearchParams({
-      keyWord: query,
-      page: currentPage,
-    });
-
-    function loadMovies() {
-      // setIsLoading(true);
-
-      searchMovieByQuery(query, currentPage)
-        .then(response => {
-          console.log(response.data);
-          setMovies(movies => [...movies, ...response.data.results]);
-          setTotalPages(response.data.total_pages);
-        })
-        .catch(e => {
-          console.log('error:', e.message);
-        })
-        .finally(() => {
-          // setIsLoading(false);
-        });
-    }
-  }, [query, currentPage]);
-
-  function getQuery(queryWord) {
-    setQuery(queryWord);
-    setMovies([]);
-  }
+    console.log('query:', searchQuery, 'page:', page);
+    searchMovieByQuery(searchQuery, page)
+      .then(response => {
+        console.log(response.data);
+        setMovies(movies => [...movies, ...response.data.results]);
+        setTotalPages(response.data.total_pages);
+      })
+      .catch(e => {
+        console.log('error:', e.message);
+      })
+      .finally(() => {
+        // setIsLoading(false);
+      });
+  }, [searchQuery, page]);
 
   // function showLoadMoreBtn() {
   //   if (currentPage < totalPages) {
@@ -82,7 +62,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="movies" element={<Movies movies={movies} />}>
-          <Route index element={<Searchbar onSearch={getQuery} />} />
+          <Route index element={<Searchbar />} />
           <Route path=":movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="review" element={<Reviews />} />

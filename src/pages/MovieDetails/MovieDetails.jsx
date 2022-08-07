@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, Outlet } from 'react-router-dom';
 import { BASE_IMG_URL, getMovieDetails } from 'service/moviesAPI';
+import css from './MovieDetails.module.css';
 
 const MovieDetails = ({ movies, genres }) => {
   const [movie, setMovie] = useState(null);
@@ -37,29 +38,31 @@ const MovieDetails = ({ movies, genres }) => {
 
   return (
     <div>
-      <button type="button" onClick={handleGoBack}>
+      <button className={css.button} type="button" onClick={handleGoBack}>
         Go back
       </button>
 
-      <h2>Movie Details</h2>
+      <h2 className={css.title}>Movie Details</h2>
       {movie && (
         <div>
           <li key={movie.id}>
-            <div>
-              <img
-                src={`${BASE_IMG_URL}w200${movie.poster_path}`}
-                alt="Poster"
-              />
+            <div className={css.wrapper}>
+              <div>
+                <img
+                  src={`${BASE_IMG_URL}w200${movie.poster_path}`}
+                  alt="Poster"
+                />
+              </div>
+              <div className={css.basicInfo}>
+                <h2>Title</h2>
+                <p>{movie.original_title}</p>
+                <h3>Overview</h3>
+                <p>{movie.overview}</p>
+                <h4>Genres</h4>
+                <ul></ul>
+              </div>
             </div>
-            <div>
-              <h2>Title</h2>
-              <p>{movie.original_title}</p>
-              <h3>Overview</h3>
-              <p>{movie.overview}</p>
-              <h4>Genres</h4>
-              <ul></ul>
-            </div>
-            <div>
+            <div className={css.additionalInfo}>
               <h5>Additional Information</h5>
               <ul>
                 <li>

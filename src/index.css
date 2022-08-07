@@ -18,8 +18,21 @@ ul,li {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: black;
+}
+
+a:hover {
+  color: rgb(4, 124, 199);
+}
+
 * {
   margin: 0;
   padding: 0;
   
 }
+

@@ -1,10 +1,18 @@
 import css from './Searchbar.module.css';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 const Searchbar = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const params = useMemo(
+    () => Object.fromEntries([...searchParams]),
+    [searchParams]
+  );
+  const { searchQuery, page } = params;
+
+  const [query, setQuery] = useState('');
   const prevQuery = usePrevious(query);
 
   function handleChange(e) {
@@ -30,21 +38,26 @@ const Searchbar = ({ onSearch }) => {
       return;
     }
 
-    onSearch(query);
+    setSearchParams({
+      searchQuery: query,
+      page: 1,
+    });
   }
 
   return (
-    <div>
+    <div className={css.form}>
       <form onSubmit={handleSubmit}>
         <input
+          className={css.input}
           onChange={handleChange}
           value={query}
-          // className={css.SearchFormInput}
           type="text"
           autoComplete="off"
           placeholder="Search movie"
         />
-        <button type="submit">Search</button>
+        <button className={css.button} type="submit">
+          Search
+        </button>
       </form>
     </div>
   );
