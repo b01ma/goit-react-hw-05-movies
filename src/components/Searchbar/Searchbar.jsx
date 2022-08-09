@@ -10,7 +10,7 @@ const Searchbar = () => {
     () => Object.fromEntries([...searchParams]),
     [searchParams]
   );
-  const { searchQuery, page } = params;
+  const { searchQuery } = params;
 
   const [query, setQuery] = useState(searchQuery || '');
   const prevQuery = usePrevious(query);

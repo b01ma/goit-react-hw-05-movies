@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-  getTrendingMovies,
-  getGenreList,
-  BASE_IMG_URL,
-} from 'service/moviesAPI';
+import { getTrendingMovies, BASE_IMG_URL } from 'service/moviesAPI';
 import css from './Home.module.css';
 
 const Home = () => {
-  // const [genres, setGenres] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
-    // getGenreList().then(r => setGenres(r.data.genres));
-
     getTrendingMovies().then(response => {
       setTrendingMovies(response.data.results);
     });

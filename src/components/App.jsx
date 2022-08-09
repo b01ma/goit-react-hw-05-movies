@@ -11,18 +11,6 @@ import MovieDetails from '../pages/MovieDetails';
 import Searchbar from './Searchbar/Searchbar';
 
 export const App = () => {
-  // const [genres, setGenres] = useState([]);
-
-  // function showLoadMoreBtn() {
-  //   if (currentPage < totalPages) {
-  //     return true;
-  //   }
-  // }
-
-  // function handleLoadMore() {
-  //   setCurrentPage(currentPage + 1);
-  // }
-
   return (
     <div className={css.container}>
       <Navbar />
