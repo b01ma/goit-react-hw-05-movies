@@ -1,0 +1,18 @@
+.actorList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.actorItem {
+    display: block;
+    margin: 10px;
+    width: 190px;
+}
+
+.actor {
+    display: inline-block;
+    font-weight: 700;
+    margin-top: 5px;
+
+}

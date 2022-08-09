@@ -1,0 +1,13 @@
+.author {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.message {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.active {
+    color: blue;
+}

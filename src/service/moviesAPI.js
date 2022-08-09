@@ -17,3 +17,11 @@ export const getTrendingMovies = () =>
 
 export const getMovieDetails = movieId =>
   axios.get(`${BASE_URL}movie/${movieId}?api_key=${KEY}`);
+
+export const getMovieReviews = movieId =>
+  axios.get(`${BASE_URL}movie/${movieId}/reviews?api_key=${KEY}`);
+
+export const getMovieCast = movieId =>
+  axios.get(`${BASE_URL}movie/${movieId}/credits?api_key=${KEY}`);
+
+// https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US

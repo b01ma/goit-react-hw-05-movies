@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-const Searchbar = ({ onSearch }) => {
+const Searchbar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const params = useMemo(
@@ -12,7 +12,7 @@ const Searchbar = ({ onSearch }) => {
   );
   const { searchQuery, page } = params;
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(searchQuery || '');
   const prevQuery = usePrevious(query);
 
   function handleChange(e) {

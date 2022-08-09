@@ -1,10 +1,10 @@
 // import React, { useEffect } from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams, Outlet } from 'react-router-dom';
+import { NavLink, useNavigate, useParams, Outlet } from 'react-router-dom';
 import { BASE_IMG_URL, getMovieDetails } from 'service/moviesAPI';
 import css from './MovieDetails.module.css';
 
-const MovieDetails = ({ movies, genres }) => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
 
@@ -15,26 +15,8 @@ const MovieDetails = ({ movies, genres }) => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate('/');
+    navigate(-1);
   };
-
-  // console.log(movies);
-
-  // const movieGenres = (genreIdArray), allGenres) => {
-  //   console.log('genreIdArray:', genreIdArray);
-  //   console.log('allGenres:', allGenres);
-
-  //   allGenres.reduce((matchedGenres, genre) => {
-  //     if (genreIdArray.includes(genre.id)) {
-  //       console.log('genreId matched', genre.id);
-  //       console.log('genreId name:', genre.name);
-
-  //       // return matchedGenres.push(genre.name);
-  //     }
-
-  //     return matchedGenres;
-  //   }, []);
-  // };
 
   return (
     <div>
@@ -58,7 +40,12 @@ const MovieDetails = ({ movies, genres }) => {
                 <p>{movie.original_title}</p>
                 <h3>Overview</h3>
                 <p>{movie.overview}</p>
-                <h4>Genres</h4>
+                <h5>
+                  Genres:
+                  {movie.genres.map(genre => {
+                    return <span key={genre.id}> {genre.name}</span>;
+                  })}
+                </h5>
                 <ul></ul>
               </div>
             </div>
@@ -66,10 +53,14 @@ const MovieDetails = ({ movies, genres }) => {
               <h5>Additional Information</h5>
               <ul>
                 <li>
-                  <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+                  <NavLink to={`/movies/${movieId}/cast`} replace>
+                    Cast
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to={`/movies/${movieId}/review`}>Review</Link>
+                  <NavLink to={`/movies/${movieId}/review`} replace>
+                    Review
+                  </NavLink>
                 </li>
               </ul>
               <Outlet />
