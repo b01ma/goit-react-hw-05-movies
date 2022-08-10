@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useParams, Outlet } from 'react-router-dom';
 import { BASE_IMG_URL, getMovieDetails } from 'service/moviesAPI';
 import css from './MovieDetails.module.css';
+import { Suspense } from 'react';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -63,7 +64,9 @@ const MovieDetails = () => {
                   </NavLink>
                 </li>
               </ul>
-              <Outlet />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Outlet />
+              </Suspense>
             </div>
           </li>
         </div>

@@ -1,7 +1,6 @@
 import css from './Searchbar.module.css';
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 
 const Searchbar = () => {
   const [searchParams, setSearchParams] = useSearchParams();

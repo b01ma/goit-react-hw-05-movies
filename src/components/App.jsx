@@ -4,13 +4,13 @@ import css from './App.module.css';
 
 import Navbar from './Navbar';
 import PageNotFound from 'pages/PageNotFound';
-import Cast from './Cast';
-import Reviews from './Reviews';
-import Searchbar from './Searchbar/Searchbar';
+import Searchbar from './Searchbar';
 
 const Home = lazy(() => import('../pages/Home'));
 const Movies = lazy(() => import('../pages/Movies'));
 const MovieDetails = lazy(() => import('../pages/MovieDetails'));
+const Reviews = lazy(() => import('./Reviews'));
+const Cast = lazy(() => import('./Cast'));
 
 export const App = () => {
   return (
