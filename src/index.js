@@ -6,7 +6,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/goit-react-hw-05-movies/">
       <App />
     </Router>
   </React.StrictMode>,
